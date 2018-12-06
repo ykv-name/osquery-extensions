@@ -23,6 +23,14 @@
 #include "iptables_ext.h"
 #include "utils.h"
 
+// Prepends a "!" to the given string if flag is present in the
+// given struct's invert flags.
+// NOTE(ww): Experimentally, it looks like recent versions of iptables
+// don't use these flags much -- they only seem to get set on the protocol
+// and a few other fields, with other fields receiving a mask instead.
+#define FLAGNEGATE(x, flag, str)                                               \
+  ((((x)->invflags) & (flag)) ? "!" + (str) : (str))
+
 using namespace osquery;
 
 namespace trailofbits {
@@ -383,18 +391,4 @@ void IptablesExtTable::parseIpEntry(const ipt_ip* ip, osquery::Row& r) {
 
 } // namespace trailofbits
 
-// REGISTER_EXTERNAL(IptablesExtTable, "plugin", "iptables_ext");
-
-// int main(int argc, char const* argv[]) {
-//   osquery::Initializer runner(argc, argv, ToolType::EXTENSION);
-
-//   auto status = startExtension("iptables_ext", "0.0.1");
-
-//   if (!status.ok()) {
-//     LOG(ERROR) << status.getMessage();
-//     runner.requestShutdown(status.getCode());
-//   }
-
-//   runner.waitForShutdown();
-//   return 0;
-// }
+#undef FLAGNEGATE

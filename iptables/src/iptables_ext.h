@@ -20,14 +20,6 @@
 
 #include <libiptc/libiptc.h>
 
-// Prepends a "!" to the given string if flag is present in the
-// given struct's invert flags.
-// NOTE(ww): Experimentally, it looks like recent versions of iptables
-// don't use these flags much -- they only seem to get set on the protocol
-// and a few other fields, with other fields receiving a mask instead.
-#define FLAGNEGATE(x, flag, str)                                               \
-  ((((x)->invflags) & (flag)) ? "!" + (str) : (str))
-
 namespace trailofbits {
 using MatchList = std::vector<std::string>;
 using MatchMap = std::map<std::string, MatchList>;
