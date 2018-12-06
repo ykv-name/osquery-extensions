@@ -368,10 +368,8 @@ void IptablesExtTable::parseIpEntry(const ipt_ip* ip, osquery::Row& r) {
   char aux_char[2] = {0};
   std::string iniface_mask;
   for (int i = 0; i < IFNAMSIZ && ip->iniface_mask[i] != 0x00; i++) {
-    aux_char[0] = kHexMap[static_cast<unsigned int>(ip->iniface_mask[i]) >>
-                          kMaskHighBits];
-    aux_char[1] =
-        kHexMap[static_cast<unsigned int>(ip->iniface_mask[i]) & kMaskLowBits];
+    aux_char[0] = kHexMap[ip->iniface_mask[i] >> kMaskHighBits];
+    aux_char[1] = kHexMap[ip->iniface_mask[i] & kMaskLowBits];
     iniface_mask += aux_char[0];
     iniface_mask += aux_char[1];
   }
@@ -379,10 +377,8 @@ void IptablesExtTable::parseIpEntry(const ipt_ip* ip, osquery::Row& r) {
 
   std::string outiface_mask = "";
   for (int i = 0; i < IFNAMSIZ && ip->outiface_mask[i] != 0x00; i++) {
-    aux_char[0] = kHexMap[static_cast<unsigned int>(ip->outiface_mask[i]) >>
-                          kMaskHighBits];
-    aux_char[1] =
-        kHexMap[static_cast<unsigned int>(ip->outiface_mask[i]) & kMaskLowBits];
+    aux_char[0] = kHexMap[ip->outiface_mask[i] >> kMaskHighBits];
+    aux_char[1] = kHexMap[ip->outiface_mask[i] & kMaskLowBits];
     outiface_mask += aux_char[0];
     outiface_mask += aux_char[1];
   }
