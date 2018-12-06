@@ -167,7 +167,7 @@ osquery::Status IptablesExtTable::genIptablesRules(
     const MatchList& matches,
     osquery::QueryData& results) {
   // Initialize the access to iptc
-  auto handle = static_cast<iptc_handle*>(iptc_init(filter.c_str()));
+  auto handle = iptc_init(filter.c_str());
   if (handle == nullptr) {
     osquery::Status(1, "Couldn't initialize iptables handle");
   }
@@ -179,7 +179,7 @@ osquery::Status IptablesExtTable::genIptablesRules(
     // iptc_read_counter.
     unsigned long ruleno = 1;
     // Iterating through all the rules per chain
-    for (const ipt_entry* chain_rule = iptc_first_rule(chain, handle);
+    for (auto chain_rule = iptc_first_rule(chain, handle);
          chain_rule != nullptr;
          chain_rule = iptc_next_rule(chain_rule, handle)) {
       osquery::Row r;
