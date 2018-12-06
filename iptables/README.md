@@ -6,27 +6,27 @@ functionality in the default `iptables` table.
 
 ## Schema
 
-| Column        | Type    | Description |
-|:--------------|:--------|:------------|
-| filter_name   | TEXT    | foo         |
-| chain         | TEXT    | foo         |
-| ruleno        | INTEGER | foo         |
-| target        | TEXT    | foo         |
-| match         | TEXT    | foo         |
-| protocol      | TEXT    | foo         |
-| src_port      | TEXT    | foo         |
-| dst_port      | TEXT    | foo         |
-| src_ip        | TEXT    | foo         |
-| src_mask      | TEXT    | foo         |
-| iniface       | TEXT    | foo         |
-| iniface_mask  | TEXT    | foo         |
-| dst_ip        | TEXT    | foo         |
-| dst_mask      | TEXT    | foo         |
-| outiface      | TEXT    | foo         |
-| outiface_mask | TEXT    | foo         |
-| packets       | BIGINT  | foo         |
-| bytes         | BIGINT  | foo         |
-| reject_with   | TEXT    | foo         |
+| Column        | Type    | Description                                              |
+|:--------------|:--------|:---------------------------------------------------------|
+| filter_name   | TEXT    | Packet matching table name.                              |
+| chain         | TEXT    | Name of the chain.                                       |
+| ruleno        | INTEGER | (1-based) index of this rule within the table and chain. |
+| target        | TEXT    | Name of the match target.                                |
+| match         | TEXT    | A string representation of the rule's match entries.     |
+| protocol      | TEXT    | Matched protocol, e.g. `tcp`.                            |
+| src_port      | TEXT    | Source port range.                                       |
+| dst_port      | TEXT    | Destination port range.                                  |
+| src_ip        | TEXT    | Source IP address.                                       |
+| src_mask      | TEXT    | Source IP's mask.                                        |
+| iniface       | TEXT    | Inbound interface.                                       |
+| iniface_mask  | TEXT    | Inbound interface's mask.                                |
+| dst_ip        | TEXT    | Destination IP address                                   |
+| dst_mask      | TEXT    | Destination IP's mask.                                   |
+| outiface      | TEXT    | Outbound interface.                                      |
+| outiface_mask | TEXT    | Outbound interface's mask.                               |
+| packets       | BIGINT  | The number of packets evaluated by the rule.             |
+| bytes         | BIGINT  | The number of bytes evaluated by the rule.               |
+| reject_with   | TEXT    | The packet rejection method.                             |
 
 ## Usage
 
